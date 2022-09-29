@@ -1,13 +1,22 @@
-<p>We will put omniauth authentication data here (if present)</p>
+<%# <p>We will put omniauth authentication data here (if present)</p> %>
 
 <% if name = session[:name] %>
   <p>Welcome <%= name -%>! We know who you are thanks to Omniauth!</p>
   <p>You were authenticated by  <%= session[:omniauth_data]['provider'] %></p>
 
-  The raw data returned from Omniauth were:
+  <%# The raw data returned from Omniauth were:
   <pre>
     <%= session[:omniauth_data] %>
-  </pre>
+  </pre> %>
+
+<% elsif session[:user_id] %>
+<p>Welcome "<%= @user.name %>" </p>
+<p>Your below Login details are recorded in our system</p>
+  <h1>Name: <%= @user.name %></h1>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>User ID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+
 <% else %>
   <p>No authentication information is available.</p>
   <p>Try <%= link_to 'Signing in with the developer strategy', '/auth/developer', method: :post %>.</p>
